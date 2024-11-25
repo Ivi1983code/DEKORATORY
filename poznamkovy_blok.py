@@ -1,4 +1,5 @@
 import pickle
+import json
 
 nakupny_zoznam = []
 
@@ -41,7 +42,7 @@ def upravit_polozku():
     except ValueError:
         print("Zadajte platné číslo.")
 
-# ulozit pickle
+# Uložiť do pickle
 def ulozit_do_pickle():
     nazov_suboru = input("Zadajte názov súboru na uloženie (napr. zoznam.pkl): ")
     try:
@@ -49,19 +50,39 @@ def ulozit_do_pickle():
             pickle.dump(nakupny_zoznam, subor)
         print(f"Zoznam bol uložený do súboru '{nazov_suboru}'.")
     except Exception as e:
-        print(f"Chyba pri ukladaní: {e}")
+        print(f"Chyba pri ukladaní do pickle: {e}")
 
-# nacitat pickle
+# Načítať z pickle
 def nacitat_zo_pickle():
     nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.pkl): ")
     try:
         with open(nazov_suboru, "rb") as subor:
             nakupny_zoznam = pickle.load(subor)
         print(f"Zoznam bol načítaný zo súboru '{nazov_suboru}'.")
-        print("Obsah načítaného zoznamu:")
         vypisat_polozky()
     except Exception as e:
-        print(f"Chyba pri načítaní: {e}")
+        print(f"Chyba pri načítaní z pickle: {e}")
+
+# Uložiť do JSON
+def ulozit_do_json():
+    nazov_suboru = input("Zadajte názov súboru na uloženie (napr. zoznam.json): ")
+    try:
+        with open(nazov_suboru, "w", encoding="utf-8") as subor:
+            json.dump(nakupny_zoznam, subor, ensure_ascii=False, indent=4)
+        print(f"Zoznam bol uložený do súboru '{nazov_suboru}'.")
+    except Exception as e:
+        print(f"Chyba pri ukladaní do JSON: {e}")
+
+# Načítať z JSON
+def nacitat_zo_json():
+    nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.json): ")
+    try:
+        with open(nazov_suboru, "r", encoding="utf-8") as subor:
+            nakupny_zoznam = json.load(subor)
+        print(f"Zoznam bol načítaný zo súboru '{nazov_suboru}'.")
+        vypisat_polozky()
+    except Exception as e:
+        print(f"Chyba pri načítaní z JSON: {e}")
 
 # Hlavné menu
 def menu():
@@ -71,9 +92,11 @@ def menu():
         print("2. Vypísať všetky položky")
         print("3. Zmazať položku")
         print("4. Upraviť položku")
-        print("5. Uložiť zoznam do súboru")
-        print("6. Načítať zoznam zo súboru")
-        print("7. Ukončiť")
+        print("5. Uložiť zoznam do pickle")
+        print("6. Načítať zoznam z pickle")
+        print("7. Uložiť zoznam do JSON")
+        print("8. Načítať zoznam z JSON")
+        print("9. Ukončiť")
 
         volba = input("Zvoľte možnosť: ")
 
@@ -90,6 +113,10 @@ def menu():
         elif volba == "6":
             nacitat_zo_pickle()
         elif volba == "7":
+            ulozit_do_json()
+        elif volba == "8":
+            nacitat_zo_json()
+        elif volba == "9":
             print("Koniec programu.")
             break
         else:
