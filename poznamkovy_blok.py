@@ -1,5 +1,5 @@
-import pickle
 import json
+import pickle
 import csv
 
 class NakupnyZoznam:
@@ -55,7 +55,7 @@ class NakupnyZoznam:
         except Exception as e:
             print(f"Chyba pri ukladaní do CSV: {e}")
 
-    def nacitat_zo_csv(self):
+    def nacitat_z_csv(self):
         nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.csv): ")
         try:
             with open(nazov_suboru, "r", encoding="utf-8") as subor:
@@ -75,7 +75,7 @@ class NakupnyZoznam:
         except Exception as e:
             print(f"Chyba pri ukladaní do pickle: {e}")
 
-    def nacitat_zo_pickle(self):
+    def nacitat_z_pickle(self):
         nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.pkl): ")
         try:
             with open(nazov_suboru, "rb") as subor:
@@ -94,7 +94,7 @@ class NakupnyZoznam:
         except Exception as e:
             print(f"Chyba pri ukladaní do JSON: {e}")
 
-    def nacitat_zo_json(self):
+    def nacitat_z_json(self):
         nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.json): ")
         try:
             with open(nazov_suboru, "r", encoding="utf-8") as subor:
@@ -103,9 +103,6 @@ class NakupnyZoznam:
             self.vypisat_polozky()
         except Exception as e:
             print(f"Chyba pri načítaní z JSON: {e}")
-
-
-
 
 class operacie:
     def __init__(self):
@@ -139,15 +136,15 @@ class operacie:
             elif volba == "5":
                 self.nakupny_zoznam.ulozit_do_csv()
             elif volba == "6":
-                self.nakupny_zoznam.nacitat_zo_csv()
+                self.nakupny_zoznam.nacitat_z_csv()
             elif volba == "7":
                 self.nakupny_zoznam.ulozit_do_pickle()
             elif volba == "8":
-                self.nakupny_zoznam.nacitat_zo_pickle()
+                self.nakupny_zoznam.nacitat_z_pickle()
             elif volba == "9":
                 self.nakupny_zoznam.ulozit_do_json()
             elif volba == "10":
-                self.nakupny_zoznam.nacitat_zo_json()
+                self.nakupny_zoznam.nacitat_z_json()
             elif volba == "11":
                 print("Koniec programu.")
                 break
