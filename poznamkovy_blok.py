@@ -49,15 +49,17 @@ def ulozit_do_pickle():
             pickle.dump(nakupny_zoznam, subor)
         print(f"Zoznam bol uložený do súboru '{nazov_suboru}'.")
     except Exception as e:
-        print(f"Chyba pri ulozeni: {e}")
+        print(f"Chyba pri ukladaní: {e}")
 
 # nacitat pickle
 def nacitat_zo_pickle():
     nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.pkl): ")
     try:
         with open(nazov_suboru, "rb") as subor:
-             nakupny_zoznam = pickle.load(subor)
+            nakupny_zoznam = pickle.load(subor)
         print(f"Zoznam bol načítaný zo súboru '{nazov_suboru}'.")
+        print("Obsah načítaného zoznamu:")
+        vypisat_polozky()
     except Exception as e:
         print(f"Chyba pri načítaní: {e}")
 
