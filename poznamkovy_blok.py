@@ -1,4 +1,4 @@
-import csv
+import pickle
 
 nakupny_zoznam = []
 
@@ -41,24 +41,22 @@ def upravit_polozku():
     except ValueError:
         print("Zadajte platné číslo.")
 
-def ulozit_do_csv():
-    nazov_suboru = input("Zadajte názov súboru na uloženie (napr. zoznam.csv): ")
+# ulozit pickle
+def ulozit_do_pickle():
+    nazov_suboru = input("Zadajte názov súboru na uloženie (napr. zoznam.pkl): ")
     try:
-        with open(nazov_suboru, "w", newline="", encoding="utf-8") as subor:
-            writer = csv.writer(subor)
-            for polozka in nakupny_zoznam:
-                writer.writerow([polozka])
+        with open(nazov_suboru, "wb") as subor:
+            pickle.dump(nakupny_zoznam, subor)
         print(f"Zoznam bol uložený do súboru '{nazov_suboru}'.")
     except Exception as e:
-        print(f"Chyba pri ukladaní: {e}")
+        print(f"Chyba pri ulozeni: {e}")
 
-def nacitat_zo_csv():
-    nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.csv): ")
+# nacitat pickle
+def nacitat_zo_pickle():
+    nazov_suboru = input("Zadajte názov súboru na načítanie (napr. zoznam.pkl): ")
     try:
-        with open(nazov_suboru, "r", encoding="utf-8") as subor:
-            reader = csv.reader(subor)
-            global nakupny_zoznam
-            nakupny_zoznam = [riadok[0] for riadok in reader]
+        with open(nazov_suboru, "rb") as subor:
+             nakupny_zoznam = pickle.load(subor)
         print(f"Zoznam bol načítaný zo súboru '{nazov_suboru}'.")
     except Exception as e:
         print(f"Chyba pri načítaní: {e}")
@@ -86,14 +84,13 @@ def menu():
         elif volba == "4":
             upravit_polozku()
         elif volba == "5":
-            ulozit_do_csv()
+            ulozit_do_pickle()
         elif volba == "6":
-            nacitat_zo_csv()
+            nacitat_zo_pickle()
         elif volba == "7":
-            print("Koniec ")
+            print("Koniec programu.")
             break
         else:
-            print("Nesprávne, skúste znova.")
-
+            print("Nesprávna voľba, skúste znova.")
 
 menu()
