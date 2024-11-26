@@ -12,6 +12,7 @@ class TimeMeasurment:
         print(f"Dokončené v čase {self.cas_zaciatku} - blok trval {trvanie} sekundy")
 
 
+
 with TimeMeasurment() as t:
     cislo = 1
     for i in range(100000000):
