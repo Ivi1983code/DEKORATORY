@@ -19,7 +19,8 @@ for odkaz in odkazy:
     for paragraf in vsechen_text:
         zkratky_3 = re.findall(r"\([A-Z]{3}\)", paragraf)
         zkratky_4 = re.findall(r"\([A-Z]{4}\)", paragraf)
-        slova_s_velkymi_pismenami =  re.findall(r"\b[A-Z][a-z]{1,}\b", paragraf)
+        slova_s_velkymi_pismenami = re.findall(r"\b[A-Z][a-z]*\b", paragraf)
+
 
         for zkratka in zkratky_3:
             print(zkratka)
